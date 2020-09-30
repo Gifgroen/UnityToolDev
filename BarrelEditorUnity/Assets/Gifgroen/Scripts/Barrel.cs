@@ -1,15 +1,58 @@
-﻿using UnityEngine;
+﻿#if UNITY_EDITOR
+using UnityEditor;
+#endif
+using UnityEngine;
 
 namespace Gifgroen
 {
+    [ExecuteAlways]
     public class Barrel : MonoBehaviour
     {
-#pragma warning disable 0649
-        [SerializeField] private float radius = 1;
+        [SerializeField] public BarrelType type;
+        
+        private static readonly int ColorKey = Shader.PropertyToID("_Color");
 
-        [SerializeField] private float damage = 10;
+        private MaterialPropertyBlock _mpb;
+        private MaterialPropertyBlock Mpb => _mpb ?? (_mpb = new MaterialPropertyBlock());
 
-        [SerializeField] private Color color = Color.red;
-#pragma warning restore 0649
+        private void OnEnable() => BarrelManager.Add(this);
+        private void OnDisable() => BarrelManager.Remove(this);
+
+        private void OnValidate()
+        {
+            TryApplyColor();
+        }
+
+        private void Awake()
+        {
+            TryApplyColor();
+        }
+        
+        public void TryApplyColor()
+        {
+            if (type == null)
+            {
+                return;
+            }
+            Mpb.SetColor(ColorKey, type.Color);
+            GetComponent<MeshRenderer>().SetPropertyBlock(Mpb);
+        }
+
+#if UNITY_EDITOR
+        private void OnDrawGizmos()
+        {
+            if (type == null)
+            {
+                return;
+            }
+            Handles.color = type.Color;
+            Transform barrelTransform = transform;
+            Handles.DrawWireDisc(
+                barrelTransform.position, 
+                barrelTransform.up, 
+                type.Radius);
+            Handles.color = Color.white;
+        }
+#endif
     }
 }
