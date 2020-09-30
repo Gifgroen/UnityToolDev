@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Gifgroen
 {
@@ -16,6 +14,7 @@ namespace Gifgroen
 #pragma warning restore 0649
 
         public Color Color => color;
+
         public float Radius => radius;
     }
 }
