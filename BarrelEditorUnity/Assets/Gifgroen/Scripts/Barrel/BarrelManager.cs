@@ -1,22 +1,23 @@
 ﻿using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Rendering;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
+using UnityEngine;
+using UnityEngine.Rendering;
 
-namespace Gifgroen
+
+namespace Gifgroen.Barrel
 {
     public class BarrelManager : MonoBehaviour
     {
-        private static readonly List<Barrel> Barrels = new List<Barrel>();
+        private static readonly List<Gifgroen.Barrel.Barrel> Barrels = new List<Gifgroen.Barrel.Barrel>();
 
-        public static void Add(Barrel barrel)
+        public static void Add(Gifgroen.Barrel.Barrel barrel)
         {
             Barrels.Add(barrel);
         }
 
-        public static void Remove(Barrel barrel)
+        public static void Remove(Gifgroen.Barrel.Barrel barrel)
         {
             Barrels.Remove(barrel);
         }
@@ -27,7 +28,7 @@ namespace Gifgroen
             Handles.zTest = CompareFunction.LessEqual;
 
             Vector3 start = transform.position;
-            foreach (Barrel barrel in Barrels)
+            foreach (Gifgroen.Barrel.Barrel barrel in Barrels)
             {
                 if (barrel.type == null)
                 {
@@ -51,7 +52,7 @@ namespace Gifgroen
 #endif
         public static void TryApplyAllColors()
         {
-            foreach (Barrel barrel in Barrels)
+            foreach (Gifgroen.Barrel.Barrel barrel in Barrels)
             {
                 barrel.TryApplyColor();
             }

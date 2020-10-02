@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Gifgroen
+namespace Gifgroen.Barrel
 {
     [CreateAssetMenu(fileName = "New BarrelType", menuName = "Gifgroen/BarrelType")]
     public class BarrelType : ScriptableObject

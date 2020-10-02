@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿using Gifgroen.Barrel;
+using UnityEditor;
 
 namespace Gifgroen.Editor
 {
